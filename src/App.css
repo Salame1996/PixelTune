@@ -1,0 +1,38 @@
+@import "tailwindcss";
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body { background-color: blue }
+
+/* Center the main container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Full viewport height */
+  padding: 20px; /* Light gray background */
+}
+
+/* Responsive container */
+.content {
+  width: 100%;
+  max-width: 600px; /* Limits width on large screens */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Mobile & Tablet Optimization */
+@media (max-width: 768px) {
+  .content {
+    max-width: 90%; /* Makes it more flexible on smaller screens */
+    padding: 15px;
+  }
+}
