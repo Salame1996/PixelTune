@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './PixelatedImage.css'; // Create this CSS file for styling
 
 const PixelatedImage = ({ imageUrl }) => {
-  const [pixelatedSections, setPixelatedSections] = useState([true, true, true, true]); // All sections pixelated initially
+  const [pixelatedSections, setPixelatedSections] = useState([true, true, true, true]);
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    if (!imageUrl) return; // Wait for image to load
+    if (!imageUrl) return;
 
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -16,7 +17,6 @@ const PixelatedImage = ({ imageUrl }) => {
       const width = img.width;
       const height = img.height;
 
-      // Set canvas size to image size
       canvas.width = width;
       canvas.height = height;
 
@@ -27,7 +27,6 @@ const PixelatedImage = ({ imageUrl }) => {
         offscreenCanvas.height = sectionHeight;
 
         offscreenContext.drawImage(canvas, left, top, sectionWidth, sectionHeight, 0, 0, sectionWidth, sectionHeight);
-
         offscreenContext.imageSmoothingEnabled = false;
         offscreenContext.drawImage(offscreenCanvas, 0, 0, sectionWidth / pixelSize, sectionHeight / pixelSize);
         offscreenContext.drawImage(
@@ -61,24 +60,28 @@ const PixelatedImage = ({ imageUrl }) => {
 
       drawCanvas();
     };
-  }, [imageUrl, pixelatedSections]); // Redraw whenever pixelatedSections changes
+  }, [imageUrl, pixelatedSections]);
 
   const unpixelateNextSection = () => {
     const nextPixelatedSections = [...pixelatedSections];
     const nextIndex = nextPixelatedSections.indexOf(true);
 
     if (nextIndex !== -1) {
-      nextPixelatedSections[nextIndex] = false; // Unpixelate the first pixelated section
-
-      setPixelatedSections(nextPixelatedSections); // Update the state to trigger a re-render
+      nextPixelatedSections[nextIndex] = false;
+      setPixelatedSections(nextPixelatedSections);
     }
   };
 
   return (
-    <div>
-      <canvas ref={canvasRef}></canvas>
-      {/* Ensure the button is rendered only once */}
-      <button onClick={unpixelateNextSection}>Unpixelate Next Section</button>
+    <div className="container">
+      <canvas ref={canvasRef} className="centered-canvas"></canvas>
+      <button
+        type="button"
+        className="centered-button"
+        onClick={unpixelateNextSection}
+      >
+        Unpixelate Next Section
+      </button>
     </div>
   );
 };

@@ -1,0 +1,25 @@
+/* Centering the canvas and button */
+.centered-canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto; /* Ensure the canvas is centered */
+    border: 1px solid #ddd; /* Optional border to debug */
+  }
+  
+  .centered-button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .centered-button:hover {
+    background-color: #45a049; /* Darker green */
+  }
+  
