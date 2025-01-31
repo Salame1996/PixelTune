@@ -35,16 +35,19 @@ function SpotifyApi() {
   // Step 2: Fetch a Random Album
   const fetchRandomAlbum = (token) => {
     const randomLetter = String.fromCharCode(97 + Math.floor(Math.random() * 26)); // Random letter (a-z)
-
-    fetch(`https://api.spotify.com/v1/search?q=${randomLetter}&type=album&limit=1`, {
+    const randomOffset = Math.floor(Math.random() * 50); // Offset aleatorio (máx 50)
+  
+    fetch(`https://api.spotify.com/v1/search?q=${randomLetter}&type=album&limit=15&offset=${randomOffset}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.albums && data.albums.items.length > 0) {
-          const album = data.albums.items[0];
-          setAlbumImage(album.images[0]?.url || ""); // Get album artwork URL
+          // Selecciona un álbum aleatorio de la lista
+          const randomIndex = Math.floor(Math.random() * data.albums.items.length);
+          const album = data.albums.items[randomIndex];
+          setAlbumImage(album.images[0]?.url || ""); // Obtiene la imagen del álbum
           console.log("Random Album:", album.name);
           console.log("Album Artwork:", album.images[0]?.url);
         } else {
@@ -53,7 +56,7 @@ function SpotifyApi() {
       })
       .catch((error) => console.error("Error fetching album:", error));
   };
-
+  
   return (
     <div>
       {albumImage ? (

@@ -20,7 +20,7 @@ const PixelatedImage = ({ imageUrl }) => {
       canvas.width = width;
       canvas.height = height;
 
-      const pixelateSection = (left, top, sectionWidth, sectionHeight, pixelSize = 10) => {
+      const pixelateSection = (left, top, sectionWidth, sectionHeight, pixelSize = 25) => {
         const offscreenCanvas = document.createElement("canvas");
         const offscreenContext = offscreenCanvas.getContext("2d");
         offscreenCanvas.width = sectionWidth;

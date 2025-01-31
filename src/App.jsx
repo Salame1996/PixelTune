@@ -9,8 +9,6 @@ function App() {
 
   return (
     <div>
-      <p className="text-rose-400">Hello World</p>
-      <PixelatedImage />
       <SpotifyApi />
     </div>
   );
